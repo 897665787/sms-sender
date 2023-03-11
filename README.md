@@ -1,37 +1,76 @@
-# sms-sender
+一个封装了短信发送的框架，支持阿里云、腾讯云短信。
 
-#### 介绍
-一个封装了短信发送的框架，支持阿里云短信、腾讯云短信等。
+### 平台支持
 
-#### 软件架构
-软件架构说明
-
-
-#### 安装教程
-
-1.  xxxx
-2.  xxxx
-3.  xxxx
-
-#### 使用说明
-
-1.  xxxx
-2.  xxxx
-3.  xxxx
-
-#### 参与贡献
-
-1.  Fork 本仓库
-2.  新建 Feat_xxx 分支
-3.  提交代码
-4.  新建 Pull Request
+| 平台                 | 支持   |
+| -------------------- |--------|
+| 阿里云               | √      |
+| 腾讯云               | √      |
 
 
-#### 特技
+### 模块说明
 
-1.  使用 Readme\_XXX.md 来支持不同的语言，例如 Readme\_en.md, Readme\_zh.md
-2.  Gitee 官方博客 [blog.gitee.com](https://blog.gitee.com)
-3.  你可以 [https://gitee.com/explore](https://gitee.com/explore) 这个地址来了解 Gitee 上的优秀开源项目
-4.  [GVP](https://gitee.com/gvp) 全称是 Gitee 最有价值开源项目，是综合评定出的优秀开源项目
-5.  Gitee 官方提供的使用手册 [https://gitee.com/help](https://gitee.com/help)
-6.  Gitee 封面人物是一档用来展示 Gitee 会员风采的栏目 [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
+```lua
+sms-sender
+├── sms-sender-core -- 核心代码
+	 └── ali -- 阿里云
+	 └── tencent -- 腾讯云
+└── sms-sender-boot-starter -- 整合springboot代码
+└── sms-sender-springboot-demo -- 在springboot中使用sms-sender的demo代码
+```
+
+### 使用说明
+
+#### 1：编译源码
+mvn install，使用maven将源码编译成jar包并且安装到本地仓库，如有私服也可以部署到私服
+
+#### 2：jar包引用（如使用阿里云），其他可参考sms-sender-core的pom配置
+
+```
+<dependency>
+    <groupId>com.jqdi</groupId>
+    <artifactId>sms-sender-spring-boot-starter</artifactId>
+    <version>1.0.0</version>
+</dependency>
+<dependency>
+	<groupId>com.aliyun</groupId>
+	<artifactId>aliyun-java-sdk-dysmsapi</artifactId>
+	<version>2.2.1</version>
+</dependency>
+<dependency>
+	<groupId>com.aliyun</groupId>
+	<artifactId>aliyun-java-sdk-core</artifactId>
+	<version>[4.4.9,5.0.0)</version>
+</dependency>
+```
+#### 3：springboot yml 配置（如使用阿里云），其他可参考sms-sender-springboot-demo的pom配置
+```
+smssender:
+  active: ali
+  ali:
+    regionId: cn-hangzhou
+    accessKey: LTAI5tRK8vFDnEijSRxNyDEs
+    secretKey: ZIIW2Gt71FU8l48JyCIe4gzXmMYESe
+    signName: XXX公司1
+```
+#### 4：在代码中使用
+```
+	@Autowired
+	private SmsSender smsSender;
+
+	public String send(String mobile, String templateCode, String templateParamJson) {
+		smsSender.send(mobile, templateCode, templateParamJson);
+		return "success";
+	}
+```
+
+### 开源共建
+
+#### 开源协议
+
+sms-sender 开源软件遵循 [Apache 2.0 协议](https://www.apache.org/licenses/LICENSE-2.0.html)。
+允许商业使用，但务必保留类作者、Copyright 信息。
+
+#### 其他说明
+
+1. 联系作者 <a href="mailto:897665787@qq.com">897665787@qq.com</a>

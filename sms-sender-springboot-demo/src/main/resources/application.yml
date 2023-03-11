@@ -1,0 +1,20 @@
+server:
+  port: 4001
+
+spring:
+  application:
+    name: springbootdemo
+
+smssender:
+  active: ali
+  ali:
+    regionId: cn-hangzhou
+    accessKey: LTAI5tRK8vFDnEijSRxNyDEs
+    secretKey: ZIIW2Gt71FU8l48JyCIe4gzXmMYESe
+    signName: XXX公司1
+  tencent:
+    appId: 1400006666
+    regionId: ap-guangzhou
+    accessKey: LTAIkcl1bVhsEpGf
+    secretKey: D9hwgRigRI1Q6rIE4PBU1lmKsqTpUm
+    signName: XXX公司2
