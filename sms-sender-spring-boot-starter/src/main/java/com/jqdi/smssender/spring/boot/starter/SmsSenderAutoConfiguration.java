@@ -10,14 +10,16 @@ import org.springframework.lang.Nullable;
 import com.jqdi.smssender.core.SendPostProcessor;
 import com.jqdi.smssender.core.SmsSender;
 import com.jqdi.smssender.core.ali.AliSmsSender;
+import com.jqdi.smssender.core.log.LogSmsSender;
 import com.jqdi.smssender.core.tencent.TencentSmsSender;
 import com.jqdi.smssender.spring.boot.starter.properties.AliSmsProperties;
+import com.jqdi.smssender.spring.boot.starter.properties.LogSmsProperties;
 import com.jqdi.smssender.spring.boot.starter.properties.TentcentSmsProperties;
 
 @Configuration
 @ConditionalOnProperty(prefix = "smssender", name = "active")
 @ConditionalOnMissingBean(SmsSender.class)
-@EnableConfigurationProperties({ AliSmsProperties.class, TentcentSmsProperties.class })
+@EnableConfigurationProperties({ AliSmsProperties.class, TentcentSmsProperties.class, LogSmsProperties.class })
 public class SmsSenderAutoConfiguration {
 
 	@Bean
@@ -42,6 +44,15 @@ public class SmsSenderAutoConfiguration {
 		String signName = properties.getSignName();
 
 		SmsSender smsSender = new TencentSmsSender(appId, regionId, accessKey, secretKey, signName, sendPostProcessor);
+		return smsSender;
+	}
+
+	@Bean
+	@ConditionalOnProperty(prefix = "smssender", name = "active", havingValue = "log")
+	SmsSender logSmsSender(LogSmsProperties properties, @Nullable SendPostProcessor sendPostProcessor) {
+		String signName = properties.getSignName();
+
+		SmsSender smsSender = new LogSmsSender(signName, sendPostProcessor);
 		return smsSender;
 	}
 }
