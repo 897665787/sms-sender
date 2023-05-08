@@ -31,6 +31,13 @@
 			<scope>provided</scope>
 		</dependency>
 		<!-- spring-boot自动配置依赖 -->
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-jdbc</artifactId>
+			<version>2.0.5.RELEASE</version>
+			<scope>provided</scope>
+		</dependency>
 		
 		<!-- 短信发送器依赖 -->
 		<dependency>

@@ -1,10 +1,12 @@
 package com.jqdi.smssender.spring.boot.starter;
 
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.lang.Nullable;
 
 import com.jqdi.smssender.core.SendPostProcessor;
@@ -12,6 +14,7 @@ import com.jqdi.smssender.core.SmsSender;
 import com.jqdi.smssender.core.ali.AliSmsSender;
 import com.jqdi.smssender.core.log.LogSmsSender;
 import com.jqdi.smssender.core.tencent.TencentSmsSender;
+import com.jqdi.smssender.spring.boot.starter.processor.SqlSendPostProcessor;
 import com.jqdi.smssender.spring.boot.starter.properties.AliSmsProperties;
 import com.jqdi.smssender.spring.boot.starter.properties.LogSmsProperties;
 import com.jqdi.smssender.spring.boot.starter.properties.TentcentSmsProperties;
@@ -21,6 +24,15 @@ import com.jqdi.smssender.spring.boot.starter.properties.TentcentSmsProperties;
 @ConditionalOnMissingBean(SmsSender.class)
 @EnableConfigurationProperties({ LogSmsProperties.class, AliSmsProperties.class, TentcentSmsProperties.class })
 public class SmsSenderAutoConfiguration {
+	
+	@Bean
+	@ConditionalOnClass(JdbcTemplate.class)
+	@ConditionalOnMissingBean
+	SendPostProcessor sqlSendPostProcessor(@Nullable JdbcTemplate jdbcTemplate) {
+		SendPostProcessor sendPostProcessor = new SqlSendPostProcessor(jdbcTemplate);
+		return sendPostProcessor;
+	}
+	
 	// for test env
 	@Bean
 	@ConditionalOnProperty(prefix = "smssender", name = "active", havingValue = "log")

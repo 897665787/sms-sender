@@ -8,7 +8,7 @@ import com.jqdi.smssender.core.SendResponse;
 /**
  * 这个是demo，实际应用中可以将发送记录保存到数据库
  */
-@Component
+//@Component
 public class LogSendPostProcessor implements SendPostProcessor {
 
 	@Override
