@@ -1,5 +1,7 @@
 package com.jqdi.smssender.springbootdemo.processor;
 
+import java.util.LinkedHashMap;
+
 import org.springframework.stereotype.Component;
 
 import com.jqdi.smssender.core.SendPostProcessor;
@@ -12,10 +14,10 @@ import com.jqdi.smssender.core.SendResponse;
 public class LogSendPostProcessor implements SendPostProcessor {
 
 	@Override
-	public void afterSend(String channel, String mobile, String signName, String templateCode, String templateParamJson,
-			SendResponse sendResponse) {
+	public void afterSend(String channel, String mobile, String signName, String templateCode,
+			LinkedHashMap<String, String> templateParamMap, SendResponse sendResponse) {
 		System.out.println("LogSendPostProcessor.afterSend():" + channel + ",mobile:" + mobile + ",signName:" + signName
-				+ ",templateCode:" + templateCode + ",templateParamJson:" + templateParamJson + ",sendResponse:"
+				+ ",templateCode:" + templateCode + ",templateParamMap:" + templateParamMap + ",sendResponse:"
 				+ sendResponse);
 	}
 }

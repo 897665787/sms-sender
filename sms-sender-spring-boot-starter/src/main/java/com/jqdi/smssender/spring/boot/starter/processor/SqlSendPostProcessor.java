@@ -1,5 +1,7 @@
 package com.jqdi.smssender.spring.boot.starter.processor;
 
+import java.util.LinkedHashMap;
+
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.jqdi.smssender.core.SendPostProcessor;
@@ -21,15 +23,16 @@ public class SqlSendPostProcessor implements SendPostProcessor {
 	}
 
 	@Override
-	public void afterSend(String channel, String mobile, String signName, String templateCode, String templateParamJson,
+	public void afterSend(String channel, String mobile, String signName, String templateCode, LinkedHashMap<String, String> templateParamMap,
 			SendResponse sendResponse) {
 		if (jdbcTemplate == null) {
 			log.warn(
 					"缺少jdbcTemplate bean,未保存数据,channel:{},mobile:{},signName:{},templateCode:{},templateParamJson:{},sendResponse:{}",
-					channel, mobile, signName, templateCode, templateParamJson, sendResponse);
+					channel, mobile, signName, templateCode, templateParamMap, sendResponse);
 			return;
 		}
-		jdbcTemplate.update(INSERT_SQL, channel, mobile, signName, templateCode, templateParamJson, "1111", "22222",
-				sendResponse.getMessage(), sendResponse.getRequestId());
+		// TODO
+		jdbcTemplate.update(INSERT_SQL, channel, mobile, signName, templateCode, templateParamMap.toString(), "1111",
+				"22222", sendResponse.getMessage(), sendResponse.getRequestId());
 	}
 }

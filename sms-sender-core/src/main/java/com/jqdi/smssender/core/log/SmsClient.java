@@ -1,5 +1,6 @@
 package com.jqdi.smssender.core.log;
 
+import java.util.LinkedHashMap;
 import java.util.UUID;
 
 import com.jqdi.smssender.core.SendResponse;
@@ -15,9 +16,9 @@ public class SmsClient {
 	public SmsClient() {
 	}
 
-	public SendResponse send(String mobile, String signName, String templateCode, String templateParam) {
+	public SendResponse send(String mobile, String signName, String templateCode, LinkedHashMap<String, String> templateParamMap) {
 		log.info("not send sms,mobile:{},signName:{},templateCode:{},templateParam:{}", mobile, signName, templateCode,
-				templateParam);
+				templateParamMap);
 
 		SendResponse resp = new SendResponse();
 		resp.setSuccess(true);
