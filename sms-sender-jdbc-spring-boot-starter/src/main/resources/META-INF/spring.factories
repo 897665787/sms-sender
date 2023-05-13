@@ -1,0 +1,4 @@
+# Auto Configure
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.jqdi.smssender.jdbc.spring.boot.starter.JdbcAutoConfiguration,\
+com.jqdi.smssender.jdbc.spring.boot.starter.SmsSenderAutoConfiguration

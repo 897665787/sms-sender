@@ -20,6 +20,7 @@
 		<!-- 核心模块 -->
 		<module>sms-sender-core</module>
 		<module>sms-sender-spring-boot-starter</module>
+		<module>sms-sender-jdbc-spring-boot-starter</module>
 	</modules>
 
 	<build>

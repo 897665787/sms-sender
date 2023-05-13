@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.jqdi.smssender.core.SendResponse;
 import com.jqdi.smssender.core.SmsSender;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @RestController
 @RequestMapping("/sms")
 public class SmsController {
@@ -22,7 +25,7 @@ public class SmsController {
 		LinkedHashMap<String, String> templateParamMap = new LinkedHashMap<>();
 		templateParamMap.put("code", code);
 		SendResponse sendResponse = smsSender.send(mobile, templateCode, templateParamMap);
-		System.out.println("sendResponse:" + sendResponse);
+		log.info("sendResponse:{}", sendResponse);
 		return "success";
 	}
 }

@@ -4,6 +4,7 @@
 
 | 平台                 | 支持   |
 | -------------------- |--------|
+| 测试渠道             | √      |
 | 阿里云               | √      |
 | 腾讯云               | √      |
 
@@ -16,6 +17,9 @@ sms-sender
 	 └── ali -- 阿里云
 	 └── tencent -- 腾讯云
 └── sms-sender-boot-starter -- 整合springboot代码
+└── sms-sender-jdbc-spring-boot-starter -- 整合springboot代码，增加了jdbc存储方案
+	 └── processor -- 阿里云
+	 	 └── SqlSendPostProcessor -- jdbc存储实现
 └── sms-sender-springboot-demo -- 在springboot中使用sms-sender的demo代码
 ```
 
