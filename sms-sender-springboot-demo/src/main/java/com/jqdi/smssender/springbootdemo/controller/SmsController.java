@@ -1,5 +1,7 @@
 package com.jqdi.smssender.springbootdemo.controller;
 
+import java.util.LinkedHashMap;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,8 +18,10 @@ public class SmsController {
 	private SmsSender smsSender;
 
 	@GetMapping("/send")
-	public String send(String mobile, String templateCode, String templateParamJson) {
-		SendResponse sendResponse = smsSender.send(mobile, templateCode, templateParamJson);
+	public String send(String mobile, String templateCode, String code) {
+		LinkedHashMap<String, String> templateParamMap = new LinkedHashMap<>();
+		templateParamMap.put("code", code);
+		SendResponse sendResponse = smsSender.send(mobile, templateCode, templateParamMap);
 		System.out.println("sendResponse:" + sendResponse);
 		return "success";
 	}

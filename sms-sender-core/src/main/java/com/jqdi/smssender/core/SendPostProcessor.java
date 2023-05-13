@@ -1,5 +1,7 @@
 package com.jqdi.smssender.core;
 
+import java.util.LinkedHashMap;
+
 /**
  * 短信发送后置处理器，例如用于记录发送记录等
  * 
@@ -15,9 +17,9 @@ public interface SendPostProcessor {
 	 * @param mobile
 	 * @param signName
 	 * @param templateCode
-	 * @param templateParamJson
+	 * @param templateParamMap
 	 * @param sendResponse
 	 */
-	void afterSend(String channel, String mobile, String signName, String templateCode, String templateParamJson,
+	void afterSend(String channel, String mobile, String signName, String templateCode, LinkedHashMap<String, String> templateParamMap,
 			SendResponse sendResponse);
 }

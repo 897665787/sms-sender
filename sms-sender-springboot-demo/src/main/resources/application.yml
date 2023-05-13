@@ -18,3 +18,5 @@ smssender:
     accessKey: LTAIkcl1bVhsEpGf
     secretKey: D9hwgRigRI1Q6rIE4PBU1lmKsqTpUm
     signName: XXX公司2
+  log:
+    signName: 测试
