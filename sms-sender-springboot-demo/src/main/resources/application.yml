@@ -4,14 +4,24 @@ server:
 spring:
   application:
     name: springbootdemo
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/template?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&tinyInt1isBit=false
+    username: root
+    password: 12345678
 
 smssender:
-  active: ali
+  active: log
+  # 打印日志（用于测试环境不想发送真实短信）
+  log:
+    signName: 测试
+  # 阿里云短信
   ali:
     regionId: cn-hangzhou
     accessKey: LTAI5tRK8vFDnEijSRxNyDEs
     secretKey: ZIIW2Gt71FU8l48JyCIe4gzXmMYESe
     signName: XXX公司1
+  # 腾讯短信
   tencent:
     appId: 1400006666
     regionId: ap-guangzhou

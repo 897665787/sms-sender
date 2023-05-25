@@ -2,10 +2,11 @@
 
 ### 平台支持
 
-| 平台                 | 支持   |
-| -------------------- |--------|
-| 阿里云               | √      |
-| 腾讯云               | √      |
+| 平台                 | 支持   | 已测试 |
+| -------------------- |--------|--------|
+| 测试渠道             | √      | √ |
+| 阿里云               | √      | √ |
+| 腾讯云               | √      | 待测试 |
 
 
 ### 模块说明
@@ -16,6 +17,9 @@ sms-sender
 	 └── ali -- 阿里云
 	 └── tencent -- 腾讯云
 └── sms-sender-boot-starter -- 整合springboot代码
+└── sms-sender-jdbc-spring-boot-starter -- 整合springboot代码，增加了jdbc存储方案，自动创建表短信模板(sms_template)、短信发送记录(sms_record)2张表
+	 └── processor -- 阿里云
+	 	 └── SqlSendPostProcessor -- jdbc存储实现
 └── sms-sender-springboot-demo -- 在springboot中使用sms-sender的demo代码
 ```
 
@@ -27,11 +31,19 @@ mvn install，使用maven将源码编译成jar包并且安装到本地仓库，�
 #### 2：jar包引用（如使用阿里云），其他可参考sms-sender-core的pom配置
 
 ```
+带jdbc存储方案：
+<dependency>
+    <groupId>com.jqdi</groupId>
+    <artifactId>sms-sender-jdbc-spring-boot-starter</artifactId>
+    <version>1.0.0</version>
+</dependency>
+普通的方案：
 <dependency>
     <groupId>com.jqdi</groupId>
     <artifactId>sms-sender-spring-boot-starter</artifactId>
     <version>1.0.0</version>
 </dependency>
+
 <dependency>
 	<groupId>com.aliyun</groupId>
 	<artifactId>aliyun-java-sdk-dysmsapi</artifactId>

@@ -14,23 +14,56 @@
 	<description>整合springboot demo代码</description>
 
 	<dependencies>
+		<!-- 工具依赖 -->
+		<dependency>
+		    <groupId>org.projectlombok</groupId>
+		    <artifactId>lombok</artifactId>
+			<version>1.18.26</version>
+			<scope>provided</scope>
+		</dependency>
+		<!-- 工具依赖 -->
+		
 		<dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
             <version>2.0.5.RELEASE</version>
         </dependency>
         
+        <!-- 短信发送器（普通） -->
+        <!-- 
 		<dependency>
 			<groupId>com.jqdi</groupId>
 			<artifactId>sms-sender-spring-boot-starter</artifactId>
 			<version>1.0.0</version>
 		</dependency>
+		 -->
+		
+		<!-- 短信发送器（含jdbc存储） -->
+		
+		<dependency>
+			<groupId>com.jqdi</groupId>
+			<artifactId>sms-sender-jdbc-spring-boot-starter</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-jdbc</artifactId>
+			<version>2.0.5.RELEASE</version>
+		</dependency>
+		<!-- mysql -->
+        <dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.46</version>
+			<scope>runtime</scope>
+		</dependency>
+		
 		<!-- 阿里 -->
 		<dependency>
 		    <groupId>com.aliyun</groupId>
 		    <artifactId>aliyun-java-sdk-dysmsapi</artifactId>
 		    <version>2.2.1</version>
-		    <scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.aliyun</groupId>
@@ -38,6 +71,30 @@
 			<optional>true</optional>
 			<version>[4.4.9,5.0.0)</version>
 		</dependency>
+		<!-- 腾讯 -->
+		<dependency>
+			<groupId>com.tencentcloudapi</groupId>
+		    <artifactId>tencentcloud-sdk-java</artifactId>
+		    <version>3.1.696</version>
+		    <scope>provided</scope>
+		</dependency>
+		<!-- ################## slf4j ################## -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.7.25</version>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-core</artifactId>
+			<version>1.2.3</version>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>1.2.3</version>
+		</dependency>
+		<!-- ################## slf4j ################## -->
 	</dependencies>
 	
 	<build>

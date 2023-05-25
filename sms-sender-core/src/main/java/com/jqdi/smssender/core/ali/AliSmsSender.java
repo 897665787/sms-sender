@@ -1,5 +1,8 @@
 package com.jqdi.smssender.core.ali;
 
+import java.util.LinkedHashMap;
+
+import com.google.gson.Gson;
 import com.jqdi.smssender.core.SendPostProcessor;
 import com.jqdi.smssender.core.SendResponse;
 import com.jqdi.smssender.core.SmsSender;
@@ -21,10 +24,12 @@ public class AliSmsSender implements SmsSender {
 	}
 
 	@Override
-	public SendResponse send(String mobile, String templateCode, String templateParamJson) {
+	public SendResponse send(String mobile, String templateCode, LinkedHashMap<String, String> templateParamMap) {
+		// AliSms的依赖包中含有gson，所以利用gson来处理
+		String templateParamJson = new Gson().toJson(templateParamMap);
 		SendResponse sendResponse = client.send(mobile, signName, templateCode, templateParamJson);
 		if (sendPostProcessor != null) {
-			sendPostProcessor.afterSend("ali", mobile, signName, templateCode, templateParamJson, sendResponse);
+			sendPostProcessor.afterSend("ali", mobile, signName, templateCode, templateParamMap, sendResponse);
 		}
 		return sendResponse;
 	}
