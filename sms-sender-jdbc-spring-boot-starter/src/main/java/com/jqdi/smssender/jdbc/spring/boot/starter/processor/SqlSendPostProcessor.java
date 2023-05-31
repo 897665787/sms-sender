@@ -41,9 +41,14 @@ public class SqlSendPostProcessor implements SendPostProcessor {
 		List<String> resultList = jdbcTemplate.queryForList(SELECT_SQL, String.class,
 				new Object[] { channel, templateCode });
 		String templateContent = resultList.isEmpty() ? null : resultList.iterator().next();
+		String content = null;
+		if (templateContent != null) {
+			content = fillTemplateContent(templateContent, templateParamMap);
+		} else {
+			content = String.format("模板sms_template未配置,channel:%s,templateCode:%s", channel, templateCode);
+		}
 
 		String templateParamJson = mapToJsonStr(templateParamMap);
-		String content = fillTemplateContent(templateContent, templateParamMap);
 		boolean success = sendResponse.isSuccess();
 		String message = sendResponse.getMessage();
 		String requestId = sendResponse.getRequestId();
