@@ -54,6 +54,12 @@
 		    <version>3.1.696</version>
 		    <scope>provided</scope>
 		</dependency>
+		<!-- 华为 -->
+		<dependency>
+		    <groupId>com.huaweicloud.sdk</groupId>
+		    <artifactId>huaweicloud-sdk-sms</artifactId>
+		    <version>3.1.44</version>
+		</dependency>
 		<!-- 短信SMS -->
 
 	</dependencies>
