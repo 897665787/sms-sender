@@ -8,5 +8,9 @@ public interface Constants {
 		String ALI = "ali";
 		// 腾讯云短信
 		String TENCENT = "tencent";
+		// 百度云短信
+		String BAIDU = "baidu";
+		// 京东云短信
+		String JINGDONG = "jingdong";
 	}
 }

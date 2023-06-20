@@ -18,7 +18,8 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 public class SmsClient {
-
+	private static final String SUCCESS_CODE = "OK";
+	
 	private com.tencentcloudapi.sms.v20210111.SmsClient client = null;
 	private String appId = null;
 
@@ -55,7 +56,7 @@ public class SmsClient {
 			}
 			SendStatus sendStatus = sendStatusSet[0];
 			String code = sendStatus.getCode();
-			if ("OK".equals(code)) {
+			if (SUCCESS_CODE.equals(code)) {
 				resp.setSuccess(true);
 			} else {
 				resp.setSuccess(false);
