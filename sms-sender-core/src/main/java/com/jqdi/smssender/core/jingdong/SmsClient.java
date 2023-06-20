@@ -6,6 +6,7 @@ import java.util.List;
 import com.jdcloud.sdk.auth.CredentialsProvider;
 import com.jdcloud.sdk.auth.StaticCredentialsProvider;
 import com.jdcloud.sdk.service.sms.model.BatchSendRequest;
+import com.jdcloud.sdk.service.sms.model.BatchSendResp;
 import com.jdcloud.sdk.service.sms.model.BatchSendResult;
 import com.jqdi.smssender.core.SendResponse;
 
@@ -39,11 +40,13 @@ public class SmsClient {
 		phoneList.add(mobile);
 		request.setPhoneList(phoneList);
 		request.setParams(params);
+		
+		SendResponse resp = new SendResponse();
 		BatchSendResult response = client.batchSend(request).getResult();
 		log.info("response:{}", response);
 		
-		SendResponse resp = new SendResponse();
-		
+		BatchSendResp batchSendResp = response.getData();
+		resp.setRequestId(batchSendResp.getSequenceNumber());
 		Boolean status = response.getStatus();
 		if (status) {
 			resp.setSuccess(true);
