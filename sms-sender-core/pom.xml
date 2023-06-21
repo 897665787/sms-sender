@@ -16,15 +16,15 @@
 	<dependencies>
 		<!-- 工具依赖 -->
 		<dependency>
-		    <groupId>org.projectlombok</groupId>
-		    <artifactId>lombok</artifactId>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
 			<version>1.18.26</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
-		    <groupId>org.apache.commons</groupId>
-		    <artifactId>commons-lang3</artifactId>
-		    <version>3.12.0</version>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.12.0</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-io</groupId>
@@ -32,14 +32,14 @@
 			<version>2.11.0</version>
 		</dependency>
 		<!-- 工具依赖 -->
-		
+
 		<!-- 短信SMS -->
 		<!-- 阿里 -->
 		<dependency>
-		    <groupId>com.aliyun</groupId>
-		    <artifactId>aliyun-java-sdk-dysmsapi</artifactId>
-		    <version>2.2.1</version>
-		    <scope>provided</scope>
+			<groupId>com.aliyun</groupId>
+			<artifactId>aliyun-java-sdk-dysmsapi</artifactId>
+			<version>2.2.1</version>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.aliyun</groupId>
@@ -50,9 +50,9 @@
 		<!-- 腾讯 -->
 		<dependency>
 			<groupId>com.tencentcloudapi</groupId>
-		    <artifactId>tencentcloud-sdk-java</artifactId>
-		    <version>3.1.696</version>
-		    <scope>provided</scope>
+			<artifactId>tencentcloud-sdk-java-sms</artifactId>
+			<version>3.1.764</version>
+			<scope>provided</scope>
 		</dependency>
 		<!-- 短信SMS -->
 

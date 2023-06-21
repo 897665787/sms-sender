@@ -8,6 +8,7 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.jqdi.smssender.core.SendPostProcessor;
@@ -31,7 +32,7 @@ public class SqlSendPostProcessor implements SendPostProcessor {
 
 	@Override
 	public void afterSend(String channel, String mobile, String signName, String templateCode,
-			LinkedHashMap<String, String> templateParamMap, SendResponse sendResponse) {
+			LinkedHashMap<String, String> templateParamMap, String content, SendResponse sendResponse) {
 		if (jdbcTemplate == null) {
 			log.warn(
 					"缺少jdbcTemplate bean,未保存数据,channel:{},mobile:{},signName:{},templateCode:{},templateParamJson:{},sendResponse:{}",
@@ -41,9 +42,14 @@ public class SqlSendPostProcessor implements SendPostProcessor {
 		List<String> resultList = jdbcTemplate.queryForList(SELECT_SQL, String.class,
 				new Object[] { channel, templateCode });
 		String templateContent = resultList.isEmpty() ? null : resultList.iterator().next();
+		String content = null;
+		if (templateContent != null) {
+			content = fillTemplateContent(templateContent, templateParamMap);
+		} else {
+			content = String.format("模板sms_template未配置,channel:%s,templateCode:%s", channel, templateCode);
+		}
 
 		String templateParamJson = mapToJsonStr(templateParamMap);
-		String content = fillTemplateContent(templateContent, templateParamMap);
 		boolean success = sendResponse.isSuccess();
 		String message = sendResponse.getMessage();
 		String requestId = sendResponse.getRequestId();

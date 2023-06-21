@@ -24,7 +24,9 @@ public class SmsController {
 	public String send(String mobile, String templateCode, String code) {
 		LinkedHashMap<String, String> templateParamMap = new LinkedHashMap<>();
 		templateParamMap.put("code", code);
-		SendResponse sendResponse = smsSender.send(mobile, templateCode, templateParamMap);
+		
+		String content = "取餐码9-2的外卖订单已提前送达你的取餐点，祝您用餐愉快！退订回T";
+		SendResponse sendResponse = smsSender.send(mobile, templateCode, templateParamMap, content);
 		log.info("sendResponse:{}", sendResponse);
 		return "success";
 	}
