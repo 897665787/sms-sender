@@ -22,7 +22,7 @@ public class SmsClient {
 
 		SendResponse resp = new SendResponse();
 		resp.setSuccess(true);
-		resp.setRequestId(UUID.randomUUID().toString());
+		resp.setRequestId(UUID.randomUUID().toString().replace("-", ""));
 		return resp;
 	}
 }
