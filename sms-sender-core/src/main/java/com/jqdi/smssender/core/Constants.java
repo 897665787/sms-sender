@@ -14,5 +14,7 @@ public interface Constants {
 		String JINGDONG = "jingdong";
 		// 七牛云短信
 		String QINIU = "qiniu";
+		// 乐刷短信中心
+		String LESHUA = "leshua";
 	}
 }
