@@ -28,11 +28,12 @@ public class BaiduSmsSender implements SmsSender {
 	}
 
 	@Override
-	public SendResponse send(String mobile, String templateCode, LinkedHashMap<String, String> templateParamMap) {
+	public SendResponse send(String mobile, String templateCode, LinkedHashMap<String, String> templateParamMap,
+			String content) {
 		SendResponse sendResponse = client.send(mobile, signName, templateCode, templateParamMap);
 		if (sendPostProcessor != null) {
 			sendPostProcessor.afterSend(Constants.Channel.BAIDU, mobile, signName, templateCode, templateParamMap,
-					sendResponse);
+					content, sendResponse);
 		}
 		return sendResponse;
 	}

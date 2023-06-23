@@ -18,8 +18,9 @@ public interface SendPostProcessor {
 	 * @param signName
 	 * @param templateCode
 	 * @param templateParamMap
+	 * @param content
 	 * @param sendResponse
 	 */
 	void afterSend(String channel, String mobile, String signName, String templateCode,
-			LinkedHashMap<String, String> templateParamMap, SendResponse sendResponse);
+			LinkedHashMap<String, String> templateParamMap, String content, SendResponse sendResponse);
 }

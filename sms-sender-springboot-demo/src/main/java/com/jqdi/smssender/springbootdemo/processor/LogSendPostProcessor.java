@@ -13,14 +13,14 @@ import com.jqdi.smssender.core.SendResponse;
  * 如果是引用了sms-sender-jdbc-spring-boot-starter，会覆盖SqlSendPostProcessor的逻辑
  * </pre>
  */
-//@Component
+// @Component
 public class LogSendPostProcessor implements SendPostProcessor {
 
 	@Override
 	public void afterSend(String channel, String mobile, String signName, String templateCode,
-			LinkedHashMap<String, String> templateParamMap, SendResponse sendResponse) {
+			LinkedHashMap<String, String> templateParamMap, String content, SendResponse sendResponse) {
 		System.out.println("LogSendPostProcessor.afterSend():" + channel + ",mobile:" + mobile + ",signName:" + signName
-				+ ",templateCode:" + templateCode + ",templateParamMap:" + templateParamMap + ",sendResponse:"
-				+ sendResponse);
+				+ ",templateCode:" + templateCode + ",templateParamMap:" + templateParamMap + ",content:" + content
+				+ ",sendResponse:" + sendResponse);
 	}
 }

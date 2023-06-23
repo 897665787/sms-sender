@@ -30,13 +30,13 @@ public class TencentSmsSender implements SmsSender {
 	}
 
 	@Override
-	public SendResponse send(String mobile, String templateCode, LinkedHashMap<String, String> templateParamMap) {
+	public SendResponse send(String mobile, String templateCode, LinkedHashMap<String, String> templateParamMap, String content) {
 		Collection<String> templateParamList = templateParamMap.values();
 		String[] templateParamArray = templateParamList.toArray(new String[] {});
 		SendResponse sendResponse = client.send(mobile, signName, templateCode, templateParamArray);
 		if (sendPostProcessor != null) {
 			sendPostProcessor.afterSend(Constants.Channel.TENCENT, mobile, signName, templateCode, templateParamMap,
-					sendResponse);
+					content, sendResponse);
 		}
 		return sendResponse;
 	}

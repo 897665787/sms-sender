@@ -31,12 +31,13 @@ public class JingdongSmsSender implements SmsSender {
 	}
 
 	@Override
-	public SendResponse send(String mobile, String templateCode, LinkedHashMap<String, String> templateParamMap) {
+	public SendResponse send(String mobile, String templateCode, LinkedHashMap<String, String> templateParamMap,
+			String content) {
 		List<String> templateParamList = templateParamMap.values().stream().collect(Collectors.toList());
 		SendResponse sendResponse = client.send(mobile, signName, templateCode, templateParamList);
 		if (sendPostProcessor != null) {
 			sendPostProcessor.afterSend(Constants.Channel.JINGDONG, mobile, signName, templateCode, templateParamMap,
-					sendResponse);
+					content, sendResponse);
 		}
 		return sendResponse;
 	}

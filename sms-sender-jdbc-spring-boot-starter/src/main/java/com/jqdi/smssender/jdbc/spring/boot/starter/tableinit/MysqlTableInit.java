@@ -33,7 +33,6 @@ public class MysqlTableInit implements InitializingBean {
 			return;
 		}
 		List<String> sqlFileList = new ArrayList<>();
-		sqlFileList.add("sms_template.sql");
 		sqlFileList.add("sms_record.sql");
 
 		for (String sqlFile : sqlFileList) {

@@ -1,7 +1,6 @@
 package com.jqdi.smssender.jdbc.spring.boot.starter.processor;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map.Entry;
@@ -20,7 +19,6 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 public class SqlSendPostProcessor implements SendPostProcessor {
-	private static final String SELECT_SQL = "SELECT template_content FROM `sms_template` WHERE channel = ? and template_code = ?;";
 	private static final String INSERT_SQL = "INSERT INTO `sms_record`(`channel`, `mobile`, `sign_name`, `template_code`, `template_param_json`, `content`, `result`, `message`, `request_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
 	private JdbcTemplate jdbcTemplate;
@@ -31,21 +29,12 @@ public class SqlSendPostProcessor implements SendPostProcessor {
 
 	@Override
 	public void afterSend(String channel, String mobile, String signName, String templateCode,
-			LinkedHashMap<String, String> templateParamMap, SendResponse sendResponse) {
+			LinkedHashMap<String, String> templateParamMap, String content, SendResponse sendResponse) {
 		if (jdbcTemplate == null) {
 			log.warn(
 					"缺少jdbcTemplate bean,未保存数据,channel:{},mobile:{},signName:{},templateCode:{},templateParamJson:{},sendResponse:{}",
 					channel, mobile, signName, templateCode, templateParamMap, sendResponse);
 			return;
-		}
-		List<String> resultList = jdbcTemplate.queryForList(SELECT_SQL, String.class,
-				new Object[] { channel, templateCode });
-		String templateContent = resultList.isEmpty() ? null : resultList.iterator().next();
-		String content = null;
-		if (templateContent != null) {
-			content = fillTemplateContent(templateContent, templateParamMap);
-		} else {
-			content = String.format("模板sms_template未配置,channel:%s,templateCode:%s", channel, templateCode);
 		}
 
 		String templateParamJson = mapToJsonStr(templateParamMap);
@@ -54,22 +43,6 @@ public class SqlSendPostProcessor implements SendPostProcessor {
 		String requestId = sendResponse.getRequestId();
 		jdbcTemplate.update(INSERT_SQL, channel, mobile, signName, templateCode, templateParamJson, content,
 				String.valueOf(success), message, requestId);
-	}
-
-	/**
-	 * 填充模板内容
-	 * 
-	 * @param templateContent
-	 * @param map
-	 * @return
-	 */
-	private String fillTemplateContent(String templateContent, LinkedHashMap<String, String> map) {
-		if (templateContent == null) {
-			return null;
-		}
-		Collection<String> values = map.values();
-		String content = String.format(templateContent, values.toArray());
-		return content;
 	}
 
 	/**

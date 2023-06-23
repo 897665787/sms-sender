@@ -30,13 +30,14 @@ public class AliSmsSender implements SmsSender {
 	}
 
 	@Override
-	public SendResponse send(String mobile, String templateCode, LinkedHashMap<String, String> templateParamMap) {
+	public SendResponse send(String mobile, String templateCode, LinkedHashMap<String, String> templateParamMap,
+			String content) {
 		// AliSms的依赖包中含有gson，所以利用gson来处理
 		String templateParamJson = new Gson().toJson(templateParamMap);
 		SendResponse sendResponse = client.send(mobile, signName, templateCode, templateParamJson);
 		if (sendPostProcessor != null) {
 			sendPostProcessor.afterSend(Constants.Channel.ALI, mobile, signName, templateCode, templateParamMap,
-					sendResponse);
+					content, sendResponse);
 		}
 		return sendResponse;
 	}
