@@ -3,6 +3,7 @@ package com.jqdi.smssender.core.tencent;
 import java.util.Collection;
 import java.util.LinkedHashMap;
 
+import com.jqdi.smssender.core.Constants;
 import com.jqdi.smssender.core.SendPostProcessor;
 import com.jqdi.smssender.core.SendResponse;
 import com.jqdi.smssender.core.SmsSender;
@@ -24,12 +25,18 @@ public class TencentSmsSender implements SmsSender {
 	}
 
 	@Override
+	public String channel() {
+		return Constants.Channel.TENCENT;
+	}
+
+	@Override
 	public SendResponse send(String mobile, String templateCode, LinkedHashMap<String, String> templateParamMap) {
 		Collection<String> templateParamList = templateParamMap.values();
 		String[] templateParamArray = templateParamList.toArray(new String[] {});
 		SendResponse sendResponse = client.send(mobile, signName, templateCode, templateParamArray);
 		if (sendPostProcessor != null) {
-			sendPostProcessor.afterSend("tencent", mobile, signName, templateCode, templateParamMap, sendResponse);
+			sendPostProcessor.afterSend(Constants.Channel.TENCENT, mobile, signName, templateCode, templateParamMap,
+					sendResponse);
 		}
 		return sendResponse;
 	}

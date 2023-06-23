@@ -16,67 +16,59 @@
 	<dependencies>
 		<!-- 工具依赖 -->
 		<dependency>
-		    <groupId>org.projectlombok</groupId>
-		    <artifactId>lombok</artifactId>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
 			<version>1.18.26</version>
 			<scope>provided</scope>
 		</dependency>
 		<!-- 工具依赖 -->
-		
+
 		<dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-            <version>2.0.5.RELEASE</version>
-        </dependency>
-        
-        <!-- 短信发送器（普通） -->
-        <!-- 
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+			<version>2.0.5.RELEASE</version>
+		</dependency>
+
+		<!-- 短信发送器（普通） -->
+		<!-- 
 		<dependency>
 			<groupId>com.jqdi</groupId>
 			<artifactId>sms-sender-spring-boot-starter</artifactId>
 			<version>1.0.0</version>
 		</dependency>
 		 -->
-		
+
 		<!-- 短信发送器（含jdbc存储） -->
-		
+
 		<dependency>
 			<groupId>com.jqdi</groupId>
 			<artifactId>sms-sender-jdbc-spring-boot-starter</artifactId>
 			<version>1.0.0</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-jdbc</artifactId>
 			<version>2.0.5.RELEASE</version>
 		</dependency>
 		<!-- mysql -->
-        <dependency>
+		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.46</version>
 			<scope>runtime</scope>
 		</dependency>
-		
+
 		<!-- 阿里 -->
 		<dependency>
-		    <groupId>com.aliyun</groupId>
-		    <artifactId>aliyun-java-sdk-dysmsapi</artifactId>
-		    <version>2.2.1</version>
+			<groupId>com.aliyun</groupId>
+			<artifactId>aliyun-java-sdk-dysmsapi</artifactId>
+			<version>2.2.1</version>
 		</dependency>
 		<dependency>
 			<groupId>com.aliyun</groupId>
 			<artifactId>aliyun-java-sdk-core</artifactId>
-			<optional>true</optional>
-			<version>[4.4.9,5.0.0)</version>
-		</dependency>
-		<!-- 腾讯 -->
-		<dependency>
-			<groupId>com.tencentcloudapi</groupId>
-		    <artifactId>tencentcloud-sdk-java</artifactId>
-		    <version>3.1.696</version>
-		    <scope>provided</scope>
+			<version>4.6.3</version>
 		</dependency>
 		<!-- ################## slf4j ################## -->
 		<dependency>
@@ -96,19 +88,19 @@
 		</dependency>
 		<!-- ################## slf4j ################## -->
 	</dependencies>
-	
+
 	<build>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<executions>
-                    <execution>
-                        <goals>
-                            <goal>repackage</goal>
-                        </goals>
-                    </execution>
-                </executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>

@@ -1,4 +1,4 @@
-一个封装了短信发送的框架，支持阿里云、腾讯云短信。
+一个封装了短信发送的框架，支持阿里云、腾讯云、百度云、京东云、七牛云短信。
 
 ### 平台支持
 
@@ -7,6 +7,9 @@
 | 测试渠道             | √      | √ |
 | 阿里云               | √      | √ |
 | 腾讯云               | √      | 待测试 |
+| 百度云               | √      | 待测试 |
+| 京东云               | √      | 待测试 |
+| 七牛云               | √      | 待测试 |
 
 
 ### 模块说明
@@ -52,7 +55,7 @@ mvn install，使用maven将源码编译成jar包并且安装到本地仓库，�
 <dependency>
 	<groupId>com.aliyun</groupId>
 	<artifactId>aliyun-java-sdk-core</artifactId>
-	<version>[4.4.9,5.0.0)</version>
+	<version>4.6.3</version>
 </dependency>
 ```
 #### 3：springboot yml 配置（如使用阿里云），其他可参考sms-sender-springboot-demo的pom配置

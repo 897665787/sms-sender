@@ -1,6 +1,5 @@
 CREATE TABLE IF NOT EXISTS `sms_template` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT 'id',
-  `type` varchar(16) NOT NULL COMMENT '业务类型(verifycode:验证码,market:营销活动,tips:提示信息)',
   `channel` varchar(16) NOT NULL COMMENT '发送渠道(log:打印日志（测试）,ali:阿里云,tencent:腾讯云)',
   `template_code` varchar(32) NOT NULL COMMENT '模板编码',
   `template_content` varchar(255) DEFAULT NULL COMMENT '模板内容',
