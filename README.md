@@ -21,7 +21,7 @@ sms-sender
 	 └── tencent -- 腾讯云
 └── sms-sender-boot-starter -- 整合springboot代码
 └── sms-sender-jdbc-spring-boot-starter -- 整合springboot代码，增加了jdbc存储方案，自动创建表短信模板(sms_template)、短信发送记录(sms_record)2张表
-	 └── processor -- 阿里云
+	 └── processor
 	 	 └── SqlSendPostProcessor -- jdbc存储实现
 └── sms-sender-springboot-demo -- 在springboot中使用sms-sender的demo代码
 ```
