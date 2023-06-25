@@ -21,11 +21,13 @@ public class SmsController {
 	private SmsSender smsSender;
 
 	@GetMapping("/send")
-	public String send(String mobile, String templateCode, String code) {
+	public String send(String mobile, String code) {
 		LinkedHashMap<String, String> templateParamMap = new LinkedHashMap<>();
 		templateParamMap.put("code", code);
-		
-		String content = "取餐码9-2的外卖订单已提前送达你的取餐点，祝您用餐愉快！退订回T";
+		String templateCode = "SMS_123456";
+		String templateContent = "您的验证码${code}，该验证码5分钟内有效，请勿泄漏于他人！";
+		String content = templateContent.replace("${code}", code);
+		smsSender.send(mobile, templateCode, templateParamMap, content);
 		SendResponse sendResponse = smsSender.send(mobile, templateCode, templateParamMap, content);
 		log.info("sendResponse:{}", sendResponse);
 		return "success";
