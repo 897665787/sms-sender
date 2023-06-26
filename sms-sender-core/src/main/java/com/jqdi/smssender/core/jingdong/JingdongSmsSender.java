@@ -4,6 +4,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.jqdi.smssender.core.Constants;
 import com.jqdi.smssender.core.SendPostProcessor;
 import com.jqdi.smssender.core.SendResponse;
@@ -31,8 +33,11 @@ public class JingdongSmsSender implements SmsSender {
 	}
 
 	@Override
-	public SendResponse send(String mobile, String templateCode, LinkedHashMap<String, String> templateParamMap,
-			String content) {
+	public SendResponse send(String mobile, String signName, String templateCode,
+			LinkedHashMap<String, String> templateParamMap, String content) {
+		if (StringUtils.isBlank(signName)) {
+			signName = this.signName;
+		}
 		List<String> templateParamList = templateParamMap.values().stream().collect(Collectors.toList());
 		SendResponse sendResponse = client.send(mobile, signName, templateCode, templateParamList);
 		if (sendPostProcessor != null) {

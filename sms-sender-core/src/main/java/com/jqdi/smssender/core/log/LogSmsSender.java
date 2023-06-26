@@ -2,6 +2,8 @@ package com.jqdi.smssender.core.log;
 
 import java.util.LinkedHashMap;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.jqdi.smssender.core.Constants;
 import com.jqdi.smssender.core.SendPostProcessor;
 import com.jqdi.smssender.core.SendResponse;
@@ -31,8 +33,11 @@ public class LogSmsSender implements SmsSender {
 	}
 
 	@Override
-	public SendResponse send(String mobile, String templateCode, LinkedHashMap<String, String> templateParamMap,
-			String content) {
+	public SendResponse send(String mobile, String signName, String templateCode,
+			LinkedHashMap<String, String> templateParamMap, String content) {
+		if (StringUtils.isBlank(signName)) {
+			signName = this.signName;
+		}
 		SendResponse sendResponse = client.send(mobile, signName, templateCode, templateParamMap);
 		if (sendPostProcessor != null) {
 			sendPostProcessor.afterSend(Constants.Channel.LOG, mobile, signName, templateCode, templateParamMap,
