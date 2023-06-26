@@ -23,11 +23,11 @@ public interface SmsSender {
 	 * @param signName
 	 *            签名（为空则使用配置的signName）
 	 * @param templateCode
-	 *            模板编码（以content做为发送方式的话可以不填）
+	 *            模板编码（以content作为发送方式的话可以不填）
 	 * @param templateParamMap
-	 *            模板编码参数（以content做为发送方式的话可以不填）
+	 *            模板编码参数（以content作为发送方式的话可以不填）
 	 * @param content
-	 *            短信内容（以templateCode做为发送方式的话可以不填）
+	 *            短信内容（以templateCode作为发送方式的话可以不填）
 	 * @return
 	 */
 	SendResponse send(String mobile, String signName, String templateCode,
@@ -39,11 +39,11 @@ public interface SmsSender {
 	 * @param mobile
 	 *            手机号
 	 * @param templateCode
-	 *            模板编码（以content做为发送方式的话可以不填）
+	 *            模板编码（以content作为发送方式的话可以不填）
 	 * @param templateParamMap
-	 *            模板编码参数（以content做为发送方式的话可以不填）
+	 *            模板编码参数（以content作为发送方式的话可以不填）
 	 * @param content
-	 *            短信内容（以templateCode做为发送方式的话可以不填）
+	 *            短信内容（以templateCode作为发送方式的话可以不填）
 	 * @return
 	 */
 	default SendResponse send(String mobile, String templateCode, LinkedHashMap<String, String> templateParamMap,
