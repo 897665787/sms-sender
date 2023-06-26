@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,17 +37,6 @@ public class AsyncSmsSender {
 	private SmsTaskService smsTaskService;
 	@Autowired
 	private SmsTaskDetailService smsTaskDetailService;
-
-	public void send0(List<String> mobileList, SmsEnum.Type type) {
-		Map<String, String> emptyMap = Maps.newHashMap();
-		List<MobileTemplateParam> mobileTemplateParamList = mobileList.stream().map(mobile -> {
-			MobileTemplateParam mobileTemplateParam = new MobileTemplateParam();
-			mobileTemplateParam.setMobile(mobile);
-			mobileTemplateParam.setTemplateParamMap(emptyMap);
-			return mobileTemplateParam;
-		}).collect(Collectors.toList());
-		send(mobileTemplateParamList, type);
-	}
 
 	public void send(List<MobileTemplateParam> mobileTemplateParamList, SmsEnum.Type type) {
 		LocalDateTime planSendTime = LocalDateTime.now();
