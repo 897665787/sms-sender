@@ -1,0 +1,65 @@
+server:
+  port: 4001
+
+spring:
+  application:
+    name: springbootdemo
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/template?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&tinyInt1isBit=false
+    username: root
+    password: 12345678
+  rabbitmq:
+    addresses: localhost:5672
+    username: guest
+    password: guest
+    virtual-host: /
+
+mybatis-plus:
+  # 配置mapper的扫描，找到所有的mapper.xml映射文件
+  mapper-locations: classpath*:mapper/**/*Mapper.xml
+  # 搜索指定包别名
+  type-aliases-package: com.jqdi.**.entity
+  configuration:
+    cacheEnabled: false # 使全局的映射器启用或禁用缓存
+    lazyLoadingEnabled: true # 全局启用或禁用延迟加载。当禁用时，所有关联对象都会即时加载
+    mapUnderscoreToCamelCase: true # 使用驼峰命名法转换字段
+    jdbcTypeForNull: NULL # 设置但JDBC类型为空时,某些驱动程序要指定值,default:OTHER，插入空值时不需要指定类型
+    logImpl: org.apache.ibatis.logging.stdout.StdOutImpl # 打印查询语句
+  global-config:
+    #主键类型 0(AUTO):"数据库ID自增", 1(INPUT):"用户输入ID",2(ID_WORKER):"全局唯一ID (数字类型唯一ID)", 3(UUID):"全局唯一ID UUID";
+    id-type: 0
+    #字段策略 0:"忽略判断",1:"非 NULL 判断"),2:"非空判断"
+    field-strategy: 1
+    #驼峰下划线转换
+    db-column-underline: true
+    #是否刷新mapper
+    refreshMapper: false
+    #数据库大写下划线转换
+    #is-capital-mode: true
+    #逻辑删除配置
+    #logic-delete-value: 1
+    #logic-not-delete-value: 0
+    #自定义填充策略接口实现
+    #meta-object-handler: com.baomidou.springboot.xxx
+    #自定义SQL注入器
+    #sql-injector: com.baomidou.mybatisplus.extension.injector.LogicSqlInjector
+    
+smssender:
+  active: log
+  # 打印日志（用于测试环境不想发送真实短信）
+  log:
+    signName: 测试
+  # 阿里云短信
+  ali:
+    regionId: cn-hangzhou
+    accessKey: LTAI5tRK8vFDnEijSRxNyDEs
+    secretKey: ZIIW2Gt71FU8l48JyCIe4gzXmMYESe
+    signName: XXX公司1
+  # 腾讯短信
+  tencent:
+    appId: 1400006666
+    regionId: ap-guangzhou
+    accessKey: LTAIkcl1bVhsEpGf
+    secretKey: D9hwgRigRI1Q6rIE4PBU1lmKsqTpUm
+    signName: XXX公司2
