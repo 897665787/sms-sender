@@ -13,7 +13,7 @@ import com.jqdi.smssender.core.SendResponse;
  * 如果是引用了sms-sender-jdbc-spring-boot-starter，会覆盖SqlSendPostProcessor的逻辑
  * </pre>
  */
-// @Component
+@Component
 public class LogSendPostProcessor implements SendPostProcessor {
 
 	@Override

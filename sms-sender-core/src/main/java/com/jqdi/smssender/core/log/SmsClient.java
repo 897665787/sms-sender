@@ -22,6 +22,7 @@ public class SmsClient {
 
 		SendResponse resp = new SendResponse();
 		resp.setSuccess(true);
+		resp.setMessage("发送成功");
 		resp.setRequestId(UUID.randomUUID().toString().replace("-", ""));
 		return resp;
 	}

@@ -18,12 +18,18 @@
 sms-sender
 ├── sms-sender-core -- 核心代码
 	 └── ali -- 阿里云
+	 └── baidu -- 百度云
+	 └── jingdong -- 京东云
+	 └── log -- 测试渠道
+	 └── qiniu -- 七牛云
 	 └── tencent -- 腾讯云
 └── sms-sender-boot-starter -- 整合springboot代码
 └── sms-sender-jdbc-spring-boot-starter -- 整合springboot代码，增加了jdbc存储方案，自动创建表短信模板(sms_template)、短信发送记录(sms_record)2张表
-	 └── processor -- 阿里云
+	 └── processor
 	 	 └── SqlSendPostProcessor -- jdbc存储实现
-└── sms-sender-springboot-demo -- 在springboot中使用sms-sender的demo代码
+└── sms-sender-springboot-demo -- 在springboot中使用sms-sender的demo代码（同步发送短信）
+└── sms-sender-springboot-async-demo -- 在springboot中使用sms-sender的demo代码（包含存储设计的异步发送短信）
+	 └── sms -- 实现异步的核心代码
 ```
 
 ### 使用说明
@@ -73,8 +79,13 @@ smssender:
 	@Autowired
 	private SmsSender smsSender;
 
-	public String send(String mobile, String templateCode, String templateParamJson) {
-		smsSender.send(mobile, templateCode, templateParamJson);
+	public String send(String mobile, String code) {
+		LinkedHashMap<String, String> templateParamMap = new LinkedHashMap<>();
+		templateParamMap.put("code", code);
+		String templateCode = "SMS_123456";
+		String templateContent = "您的验证码${code}，该验证码5分钟内有效，请勿泄漏于他人！";
+		String content = templateContent.replace("${code}", code);
+		smsSender.send(mobile, templateCode, templateParamMap, content);
 		return "success";
 	}
 ```

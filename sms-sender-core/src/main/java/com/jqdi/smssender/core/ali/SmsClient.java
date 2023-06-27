@@ -26,7 +26,7 @@ public class SmsClient {
 	private IAcsClient client = null;
 
 	public SmsClient(String regionId, String accessKey, String secretKey) {
-		DefaultProfile profile = DefaultProfile.getProfile("cn-hangzhou", accessKey, secretKey);
+		DefaultProfile profile = DefaultProfile.getProfile(regionId, accessKey, secretKey);
 		this.client = new DefaultAcsClient(profile);
 	}
 
